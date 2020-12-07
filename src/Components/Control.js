@@ -1,27 +1,32 @@
 import React,{ Component } from 'react';
+import Button from '@material-ui/core/Button';
 
 class Control extends Component {
   render(){    
     return (
-        <ul>
-            <li><a href="/create" 
+        <div>
+            <Button 
                    onClick={function(e){
                        e.preventDefault(); 
                        this.props.onChangeMode('create');
-                    }.bind(this)}>create</a></li>
-            <li><a href="/update"
+                    }.bind(this)}
+                    variant="contained">Create</Button>
+            <p/>
+            <Button
                    onClick={function(e){
                       e.preventDefault(); 
                       this.props.onChangeMode('update');
                   }.bind(this)}
-            >update</a></li>
-            <li><input 
+                  variant="contained" >Update</Button>
+            <p/>                  
+            <Button
                   onClick={function(e){
                        e.preventDefault(); 
                        this.props.onChangeMode('delete');
                     }.bind(this)}
-                  type="button" value="delete"/></li>
-        </ul>
+                    variant="contained" >Delete</Button> 
+            
+        </div>
     );
   }
 }
