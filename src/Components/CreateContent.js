@@ -15,7 +15,17 @@ class CreateContent extends Component {
             onSubmit={function(e){
                 //debugger;
                 e.preventDefault(); 
-                this.props.onSubmit(e.target[0].value,e.target[1].value);
+                var strTitle = e.target[1].value;
+                var strDesc = e.target[2].value;                
+                if(strTitle !== "" && strDesc !== "")
+                {
+                  this.props.onSubmit(strTitle,strDesc);
+                }
+                else
+                {
+                  alert('제목과 설명을 입력하세요.');
+                  return;
+                }
             }.bind(this)}
           >
 
