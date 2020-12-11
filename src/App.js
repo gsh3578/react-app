@@ -17,12 +17,25 @@ class App extends Component {
       welcome:{title:'Welcome!', desc:'Welcome to react world!!!!'},
       Subject:{title:'WEB', sub:'world wide web!!'},
       Content:{title:'HTML1', desc:'HTML is HyperText Markup Language..'},
-      Contents: [
-        {id:1,title:'HTML', desc:'HTML is for information.'},
-        {id:2,title:'CSS', desc:'CSS is for design.'},
-        {id:3,title:'JavaScript', desc:'JavaScript is for interactive.'}
-      ]
+      Contents: []
+      // Contents: [
+      //   {id:1,title:'HTML', desc:'HTML is for information.'},
+      //   {id:2,title:'CSS', desc:'CSS is for design.'},
+      //   {id:3,title:'JavaScript', desc:'JavaScript is for interactive.'}
+      // ]
     }
+  }
+
+  componentDidMount(){
+    this.callApi()
+      .then(res => this.setState({customers:res}))
+      .catch(err => console.log(err));
+  }
+
+  callApi= async() => {
+    const response = await fetch('/api/customers');
+    const body = await response.json();
+    return body;
   }
 
   getReadContent(){
@@ -47,7 +60,8 @@ class App extends Component {
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
     }else if(_mode === "read"){
       var _content = this.getReadContent();      
-      _article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>;
+      {_content?_content.map(c=>{return(<ReadContent title={c.title} desc={c.desc}></ReadContent>); }):"Loading.." }
+      //_article = <ReadContent title={_content.title} desc={_content.desc}></ReadContent>;
     }else if(_mode === "create")
     {
       _article = <CreateContent 
